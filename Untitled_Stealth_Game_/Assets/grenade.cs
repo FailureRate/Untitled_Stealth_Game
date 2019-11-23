@@ -38,7 +38,7 @@ public class grenade : MonoBehaviour
             count++;
         }
         if (Thrown == false) { transform.position = player.transform.position; count = 0; destinationLocked = false; }
-        if (Input.GetMouseButtonDown(0) && this.tag == "Grenade") { Thrown = true;}
+        if (Input.GetMouseButtonDown(1) && this.tag == "Grenade") { Thrown = true;}
 
     }
 }
