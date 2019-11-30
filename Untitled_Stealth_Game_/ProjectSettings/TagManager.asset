@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Grenade
   - Flasher
+  - BOOM
   layers:
   - Default
   - TransparentFX

@@ -5,6 +5,8 @@ using UnityEngine;
 public class detection : MonoBehaviour
 {
     public basicEnemy enemy;
+    private int countdown;
+    private bool playerLeft;
     // Start is called before the first frame update
     void Start()
     {
@@ -14,7 +16,11 @@ public class detection : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        if (playerLeft == true)
+        {
+            countdown++;
+            if (countdown >= 200) { enemy.playerDetected = false; countdown = 0; playerLeft = false; }
+        }
     }
 
     void OnTriggerEnter2D(Collider2D other)
@@ -22,11 +28,15 @@ public class detection : MonoBehaviour
         if (other.CompareTag("Player"))
         {
             enemy.playerDetected = true;
-            
+            playerLeft = false;
+
         }
     }
-    void OnTriggerStay2D(Collider2D other)
+    void OnTriggerExit2D(Collider2D other)
     {
-
+        if (other.CompareTag("Player"))
+        {
+            playerLeft = true;
+        }
     }
 }

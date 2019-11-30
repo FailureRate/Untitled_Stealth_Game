@@ -31,4 +31,12 @@ public class playerMovement : MonoBehaviour
             transform.position += Vector3.up * moveSpeed * Time.deltaTime;
         }
     }
+
+    void OnTriggerEnter2D(Collider2D other)
+    {
+        if (other.CompareTag("BOOM"))
+        {
+            Destroy(this.gameObject);
+        }
+    }
 }

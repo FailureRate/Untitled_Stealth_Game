@@ -8,6 +8,7 @@ public class grenade : MonoBehaviour
     private Vector3 orientation;
 
     public GameObject player;
+    public GameObject explosion;
     public int speedVar;
     public int count;
     public bool Thrown = false;
@@ -34,7 +35,11 @@ public class grenade : MonoBehaviour
             Vector3 direction = destination - transform.position;
             Vector3 velocity = direction * speedVar;
             transform.position += velocity * Time.deltaTime;
-            if (count >= 200) { Thrown = false; }
+            if (count >= 150)
+            {
+                Thrown = false;
+                Instantiate(explosion, transform.position, transform.rotation);
+            }
             count++;
         }
         if (Thrown == false) { transform.position = player.transform.position; count = 0; destinationLocked = false; }
