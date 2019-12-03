@@ -5,10 +5,13 @@ using UnityEngine;
 public class missle : MonoBehaviour
 {
     public GameObject player;
+    public GameObject explosion;
     private Vector3 orientation;
     public int moveSpeed;
     public bool homing;
     private Vector3 direction;
+
+    private int countdown;
     // Start is called before the first frame update
     void Start()
     {
@@ -19,7 +22,7 @@ public class missle : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Destroy(this.gameObject, 5f);
+        //Destroy(this.gameObject, 5f);
         if (homing)
         {
             direction = player.transform.position - transform.position;
@@ -33,6 +36,8 @@ public class missle : MonoBehaviour
             transform.eulerAngles = new Vector3(0, 0, -Mathf.Atan2(direction.x, direction.y) * Mathf.Rad2Deg);
             Vector3 velocity = direction.normalized * moveSpeed / 5;
             transform.position += velocity * Time.deltaTime;
+            if (countdown >= 150) { Instantiate(explosion, transform.position, transform.rotation); Destroy(this.gameObject); }
         }
+        countdown++;
     }
 }

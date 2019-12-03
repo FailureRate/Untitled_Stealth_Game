@@ -17,6 +17,8 @@ public class basicEnemy : MonoBehaviour
     [SerializeField]
     private int pathnode;
     private int countdown;
+
+    private bool InRange;
     // Start is called before the first frame update
     void Start()
     {
@@ -27,12 +29,13 @@ public class basicEnemy : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (gren.GetComponent<grenade>().Thrown == true)
+        if (gren.GetComponent<grenade>().Thrown == true && InRange == true)
         {
-            direction = transform.position - gren.transform.position;
-            transform.eulerAngles = new Vector3(0, 0, -Mathf.Atan2(direction.x, direction.y) * Mathf.Rad2Deg);
-            Vector3 velocity = direction.normalized * speedVar / 5;
-            transform.position += velocity;
+                direction = transform.position - gren.transform.position;
+                transform.eulerAngles = new Vector3(0, 0, -Mathf.Atan2(direction.x, direction.y) * Mathf.Rad2Deg);
+                Vector3 velocity = direction.normalized * speedVar / 5;
+                transform.position += velocity;
+            
         }
         else if (playerDetected)
         {
@@ -58,6 +61,12 @@ public class basicEnemy : MonoBehaviour
             followingPath = true;
         }
 
+        if (gren.transform.position.x <= transform.position.x + 5 && gren.transform.position.x >= transform.position.x - 5 && gren.transform.position.y <= transform.position.y + 5 && gren.transform.position.y >= transform.position.y - 5)
+        {
+            InRange = true;
+        }
+        else { InRange = false; }
+
     }
 
     void movetoward(Vector3 position)
@@ -72,7 +81,7 @@ public class basicEnemy : MonoBehaviour
     {
         if (other.CompareTag("BOOM"))
         {
-            Destroy(this.gameObject);
+           // Destroy(this.gameObject);
         }
     }
 }

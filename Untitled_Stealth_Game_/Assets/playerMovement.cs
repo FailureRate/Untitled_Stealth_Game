@@ -38,5 +38,9 @@ public class playerMovement : MonoBehaviour
         {
             Destroy(this.gameObject);
         }
+        if (other.CompareTag("Missle"))
+        {
+            Destroy(this.gameObject);
+        }
     }
 }
