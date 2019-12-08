@@ -8,6 +8,7 @@ TagManager:
   - Flasher
   - BOOM
   - Missle
+  - Baddie
   layers:
   - Default
   - TransparentFX

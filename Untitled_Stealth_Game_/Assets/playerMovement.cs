@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class playerMovement : MonoBehaviour
 {
+    public Rigidbody2D rb;
     public float moveSpeed;
     // Start is called before the first frame update
     void Start()
@@ -16,19 +17,46 @@ public class playerMovement : MonoBehaviour
     {
         if (Input.GetKey(KeyCode.D))
         {
-            transform.position += Vector3.right * moveSpeed * Time.deltaTime;
+            rb.velocity += Vector2.right * moveSpeed;
+            if (rb.velocity.x > -moveSpeed)
+            {
+                rb.velocity = new Vector2(moveSpeed, rb.velocity.y);
+            }
+            rb.velocity.Normalize();
         }
         if (Input.GetKey(KeyCode.A))
         {
-            transform.position += Vector3.left* moveSpeed * Time.deltaTime;
+            rb.velocity += Vector2.left* moveSpeed;
+            if (rb.velocity.x < -moveSpeed)
+            {
+                rb.velocity = new Vector2(-moveSpeed, rb.velocity.y);
+            }
+            rb.velocity.Normalize();
+
         }
         if (Input.GetKey(KeyCode.S))
         {
-            transform.position += Vector3.down * moveSpeed * Time.deltaTime;
+           rb.velocity += Vector2.down * moveSpeed;
+            if (rb.velocity.y < -moveSpeed)
+            {
+                rb.velocity = new Vector2(rb.velocity.x, -moveSpeed);
+            }
+            rb.velocity.Normalize();
+
         }
         if (Input.GetKey(KeyCode.W))
         {
-            transform.position += Vector3.up * moveSpeed * Time.deltaTime;
+            rb.velocity += Vector2.up * moveSpeed; //transform.position += Vector3.up * moveSpeed * Time.deltaTime;
+            if(rb.velocity.y > moveSpeed)
+            {
+                rb.velocity = new Vector2(rb.velocity.x, moveSpeed);
+            }
+            rb.velocity.Normalize();
+
+        }
+        if (!Input.anyKey)
+        {
+            rb.velocity = Vector2.zero;
         }
     }
 
