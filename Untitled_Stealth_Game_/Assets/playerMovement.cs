@@ -6,6 +6,7 @@ public class playerMovement : MonoBehaviour
 {
     public Rigidbody2D rb;
     public float moveSpeed;
+    public Vector3 velocity;
     // Start is called before the first frame update
     void Start()
     {
@@ -15,6 +16,8 @@ public class playerMovement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        velocity = rb.velocity;
+
         if (Input.GetKey(KeyCode.D))
         {
             rb.velocity += Vector2.right * moveSpeed;

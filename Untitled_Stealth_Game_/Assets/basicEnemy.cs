@@ -12,6 +12,7 @@ public class basicEnemy : MonoBehaviour
     public bool playerDetected;
     private Vector3 direction;
     public bool followingPath;
+    public Vector3 velocity;
 
     public Vector3[] pathNodes;
     [SerializeField]
@@ -33,7 +34,7 @@ public class basicEnemy : MonoBehaviour
         {
                 direction = transform.position - gren.transform.position;
                 transform.eulerAngles = new Vector3(0, 0, -Mathf.Atan2(direction.x, direction.y) * Mathf.Rad2Deg);
-                Vector3 velocity = direction.normalized * speedVar / 5;
+                velocity = direction.normalized * speedVar / 5;
                 transform.position += velocity;
             
         }
@@ -41,7 +42,7 @@ public class basicEnemy : MonoBehaviour
         {
             movetoward(player.transform.position);
             followingPath = false;
-            if (countdown >= 500)
+            if (countdown >= 300)
             {
                 countdown = 0;
                 missle.GetComponent<missle>().player = player;
@@ -73,7 +74,7 @@ public class basicEnemy : MonoBehaviour
     {
         direction = position - transform.position;
         transform.eulerAngles = new Vector3(0, 0, -Mathf.Atan2(direction.x, direction.y) * Mathf.Rad2Deg);
-        Vector3 velocity = direction.normalized * speedVar / 5;
+        velocity = direction.normalized * speedVar / 5;
         transform.position += velocity;
     }
 

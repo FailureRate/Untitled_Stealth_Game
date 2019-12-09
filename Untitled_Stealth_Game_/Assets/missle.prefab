@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5161913189025382689}
   - component: {fileID: 5161913189025382694}
-  - component: {fileID: 5161913189025382695}
+  - component: {fileID: 3238438857629951695}
   - component: {fileID: 4309108705551772440}
   - component: {fileID: 7344417568301088030}
   m_Layer: 0
@@ -83,7 +83,7 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &5161913189025382695
+--- !u!114 &3238438857629951695
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -98,8 +98,9 @@ MonoBehaviour:
   player: {fileID: 0}
   explosion: {fileID: 3851430118206995908, guid: f7d6276f9a8bebf4da71bbb59cde1ed2,
     type: 3}
-  moveSpeed: 30
-  homing: 0
+  moveSpeed: 10
+  maxAngularSpeed: 0
+  homing: 1
 --- !u!50 &4309108705551772440
 Rigidbody2D:
   serializedVersion: 4
