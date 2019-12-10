@@ -30140,9 +30140,13 @@ MonoBehaviour:
   map: {fileID: 1004223180}
   speed: 5
   player: {fileID: 1221501635}
-  moveToHit: 0
-  stopMovementForNow: 0
-  countdown: 0
+  distinations:
+  - {fileID: 1749650550}
+  - {fileID: 984565558}
+  - {fileID: 708393465}
+  - {fileID: 831696700}
+  - {fileID: 1373254844}
+  - {fileID: 760816459}
 --- !u!212 &2008107981
 SpriteRenderer:
   m_ObjectHideFlags: 0

@@ -83,9 +83,12 @@ public class AStar {
         List<Node> path = new List<Node>();
 
         // Generate the shortest path
+
+        path.Add(goal);
+
        // if (goal != null)
-        
-            path.Add(goal);
+       // {
+
             Node p = predecessorDict[goal];//gets error when goal
 
             while (p != start)
@@ -98,6 +101,10 @@ public class AStar {
 
             List<Node> smoothedPath = GetSmoothedPath(path);
             return smoothedPath;
+       // }
+        //else {
+           // return null;
+       // }
        
     }
 
