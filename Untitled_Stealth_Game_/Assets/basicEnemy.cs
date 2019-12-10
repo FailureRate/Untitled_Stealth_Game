@@ -18,13 +18,14 @@ public class basicEnemy : MonoBehaviour
     [SerializeField]
     private int pathnode;
     private int countdown;
-
+    public Rigidbody2D rb;
     private bool InRange;
     // Start is called before the first frame update
     void Start()
     {
         direction = Vector3.forward;
         pathnode = 0;
+        rb = this.gameObject.GetComponent<Rigidbody2D>();
     }
 
     // Update is called once per frame
@@ -35,8 +36,9 @@ public class basicEnemy : MonoBehaviour
                 direction = transform.position - gren.transform.position;
                 transform.eulerAngles = new Vector3(0, 0, -Mathf.Atan2(direction.x, direction.y) * Mathf.Rad2Deg);
                 velocity = direction.normalized * speedVar / 5;
-                transform.position += velocity;
-            
+                rb.velocity += new Vector2(direction.x, direction.y) * speedVar;
+            //transform.position += velocity;
+
         }
         else if (playerDetected)
         {
@@ -54,7 +56,7 @@ public class basicEnemy : MonoBehaviour
         {
             movetoward(pathNodes[pathnode]);
             if ((pathNodes[pathnode].x + 0.5 > transform.position.x && transform.position.x > pathNodes[pathnode].x - 0.5) && (pathNodes[pathnode].y + 0.5 > transform.position.y && transform.position.y > pathNodes[pathnode].y - 0.5))
-            { pathnode++; }
+            { pathnode++; rb.velocity = Vector2.zero; }
             if (pathnode >= pathNodes.Length) { pathnode = 0; }
         }
         else
@@ -75,14 +77,15 @@ public class basicEnemy : MonoBehaviour
         direction = position - transform.position;
         transform.eulerAngles = new Vector3(0, 0, -Mathf.Atan2(direction.x, direction.y) * Mathf.Rad2Deg);
         velocity = direction.normalized * speedVar / 5;
-        transform.position += velocity;
+        rb.velocity += new Vector2(direction.x, direction.y) * speedVar;
+        //transform.position += velocity;
     }
 
     void OnTriggerEnter2D(Collider2D other)
     {
         if (other.CompareTag("BOOM"))
         {
-           // Destroy(this.gameObject);
+            Destroy(this.gameObject);
         }
     }
 }
