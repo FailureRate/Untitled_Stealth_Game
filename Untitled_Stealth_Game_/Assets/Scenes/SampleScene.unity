@@ -42033,6 +42033,11 @@ PrefabInstance:
       propertyPath: gren
       value: 
       objectReference: {fileID: 133082654}
+    - target: {fileID: 6251988050986070490, guid: 0dc402f34f5a8524e92cc97b88bbf11b,
+        type: 3}
+      propertyPath: missleHome
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 6251988050986070494, guid: 0dc402f34f5a8524e92cc97b88bbf11b,
         type: 3}
       propertyPath: m_SortingOrder

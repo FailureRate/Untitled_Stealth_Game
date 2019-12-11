@@ -31,7 +31,8 @@ public class missle : MonoBehaviour
         {
             float dt = Time.deltaTime;
 
-            Vector3 targetVelocity = enemy.gameObject.GetComponent<basicEnemy>().velocity;
+            //Vector3 targetVelocity = enemy.gameObject.GetComponent<basicEnemy>().velocity;
+            Vector3 targetVelocity = enemy.gameObject.GetComponent<basicEnemy>().rb.velocity;
             Vector3 vr = targetVelocity - velocity;
             Vector3 sr = player.transform.position - transform.position;
             float tc = sr.magnitude / vr.magnitude;
@@ -71,7 +72,7 @@ public class missle : MonoBehaviour
         else
         {
             transform.eulerAngles = new Vector3(0, 0, -Mathf.Atan2(direction.x, direction.y) * Mathf.Rad2Deg);
-            Vector3 velocity = direction.normalized * moveSpeed / 5;
+            Vector3 velocity = direction.normalized * moveSpeed;
             transform.position += velocity * Time.deltaTime;
             if (countdown >= 150) { Instantiate(explosion, transform.position, transform.rotation); Destroy(this.gameObject); }
         }

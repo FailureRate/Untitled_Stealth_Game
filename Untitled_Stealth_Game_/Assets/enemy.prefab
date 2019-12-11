@@ -98,7 +98,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   gren: {fileID: 0}
   missle: {fileID: 5161913189025382692, guid: 9efe086120efa154294ac7ce76ad3118, type: 3}
-  speedVar: 0.01
+  speedVar: 0.5
   player: {fileID: 0}
   playerDetected: 0
   followingPath: 0
