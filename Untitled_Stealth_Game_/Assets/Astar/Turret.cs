@@ -104,10 +104,22 @@ public class Turret : MonoBehaviour
 
         if (distinations[targetNode + 1] == null)
         {
-            randomIndex = 0;
-            moveToHit = false;
-            countdown = 0;
-            return randomIndex;
+            if (randomIndex + 1 >= distinations.Count)
+            {
+                randomIndex = 0;
+                moveToHit = false;
+                countdown = 0;
+                return randomIndex;
+            }
+            else
+            {
+                randomIndex++;
+                moveToHit = false;
+                countdown = 0;
+                return randomIndex;
+
+
+            }
         }
         else
         {

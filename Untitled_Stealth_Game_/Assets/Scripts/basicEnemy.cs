@@ -20,6 +20,7 @@ public class basicEnemy : MonoBehaviour
     private int countdown;
     public Rigidbody2D rb;
     private bool InRange;
+    private bool detected;
 
     public bool missleHome;
     // Start is called before the first frame update
@@ -33,20 +34,22 @@ public class basicEnemy : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (gren.GetComponent<grenade>().Thrown == true && InRange == true)
+        if (gren.GetComponent<grenade>().Thrown == true && (InRange == true || detected == true))
         {
                 rb.velocity = Vector2.zero;
                 direction = transform.position - gren.transform.position;
                 transform.eulerAngles = new Vector3(0, 0, -Mathf.Atan2(direction.x, direction.y) * Mathf.Rad2Deg);
                 velocity = direction.normalized * speedVar;
-                rb.velocity += new Vector2(direction.x, direction.y) * speedVar * 3;
-                //transform.position += velocity;
-
+                rb.velocity += new Vector2(direction.x, direction.y) * (speedVar+0.3f);
+            //transform.position += velocity;
+            detected = true;
+            playerDetected = true;
         }
         else if (playerDetected)
         {
             rb.velocity = Vector2.zero;
             movetoward(player.transform.position);
+            //intercept();
             followingPath = false;
             if (countdown >= 300)
             {
@@ -69,6 +72,7 @@ public class basicEnemy : MonoBehaviour
         else
         {
             followingPath = true;
+            detected = false;
         }
 
         if (gren.transform.position.x <= transform.position.x + 5 && gren.transform.position.x >= transform.position.x - 5 && gren.transform.position.y <= transform.position.y + 5 && gren.transform.position.y >= transform.position.y - 5)
@@ -83,9 +87,19 @@ public class basicEnemy : MonoBehaviour
     {
         direction = position - transform.position;
         transform.eulerAngles = new Vector3(0, 0, -Mathf.Atan2(direction.x, direction.y) * Mathf.Rad2Deg);
-        velocity = direction.normalized * speedVar;
         rb.velocity += new Vector2(direction.x, direction.y) * speedVar;
         //transform.position += velocity;
+    }
+
+    void intercept()
+    {
+        Vector2 vr = player.GetComponent<playerMovement>().rb.velocity - rb.velocity;
+        Vector3 sr = player.transform.position - transform.position;
+        float tc = sr.magnitude / vr.magnitude;
+        Vector3 st = player.transform.position + transform.position * tc;
+        direction = st - transform.position;
+        transform.eulerAngles = new Vector3(0, 0, -Mathf.Atan2(direction.x, direction.y) * Mathf.Rad2Deg);
+        rb.velocity += new Vector2(direction.x, direction.y) * speedVar;
     }
 
     void OnTriggerEnter2D(Collider2D other)
